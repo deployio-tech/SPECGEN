@@ -201,6 +201,29 @@ npm start      # Run compiled server
 
 ---
 
+## Docker (Client + Server Only)
+
+This setup intentionally excludes the `services/` FastAPI container for now.
+
+```bash
+# 1) Build image from repo root
+docker build -t specgen-app .
+
+# 2) Run container (set real secrets first)
+docker run --rm -p 3000:3000 \
+  -e GROQ_API_KEY=your_groq_api_key_here \
+  -e GH_TOKEN=your_github_token_here \
+  -e MONGODB_URI=mongodb://host.docker.internal:27017/specgen \
+  -e PORT=3000 \
+  specgen-app
+```
+
+Then open `http://localhost:3000`.
+
+The server serves the built React client and API from the same origin, so client requests to `/api/*` work correctly without extra client-side URL changes.
+
+---
+
 ## Troubleshooting
 
 **"GROQ_API_KEY not configured"**

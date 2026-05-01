@@ -33,10 +33,6 @@ app.use("/api/validate-repo", validateRepoRouter);
 app.use("/api/generate-diagram", generateDiagramRouter);
 app.use("/api/generate-docs", generateDocsRouter);
 
-app.get("/", (req, res) => {
-  res.json({ status: "ok", service: "specgen-server" });
-});
-
 // Serve frontend in production: main homepage at '/'
 if (process.env.NODE_ENV === "production") {
   const clientDist = path.resolve(__dirname, "../../client/dist");
